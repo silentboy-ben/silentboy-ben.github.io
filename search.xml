@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Typora的安装与激活</title>
+      <link href="/2025/05/22/Typora%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E6%BF%80%E6%B4%BB/"/>
+      <url>/2025/05/22/Typora%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E6%BF%80%E6%B4%BB/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Typora的安装与激活"><a href="#Typora的安装与激活" class="headerlink" title="Typora的安装与激活"></a>Typora的安装与激活</h1><blockquote><p><em>因为搭建自己的博客等一些原因需要编写markdown，但我自己以前的typora激活过的不好用了，只能上网找师傅们提供的方法，以下是我尝试都好用的，当然方法不唯一。</em></p></blockquote><h2 id="1-前期准备工作"><a href="#1-前期准备工作" class="headerlink" title="1.前期准备工作"></a>1.前期准备工作</h2><h3 id="1-1-Typora工具的下载"><a href="#1-1-Typora工具的下载" class="headerlink" title="1.1 Typora工具的下载"></a>1.1 Typora工具的下载</h3><blockquote><p>Typora官网网址：<a href="https://typora.io/">https://typora.io/</a><br>Typora中文官网网址：<a href="https://typoraio.cn/">https://typoraio.cn/</a></p></blockquote><h3 id="1-2-Typora激活工具的下载"><a href="#1-2-Typora激活工具的下载" class="headerlink" title="1.2 Typora激活工具的下载"></a>1.2 Typora激活工具的下载</h3><blockquote><ol><li><p>新版激活工具</p><p><a href="https://pan.baidu.com/s/1YrzTh84-WFmSGlYktmUULA?pwd=xg9e">激活工具</a></p></li><li><p>旧版激活工具（参考自渊龙Sec安全团队）</p><p><a href="https://pan.baidu.com/s/1DwUsi2flXxcklLCJPWOj5Q?pwd=cdrh">激活工具</a></p></li></ol></blockquote><h2 id="2-Typora安装"><a href="#2-Typora安装" class="headerlink" title="2.Typora安装"></a>2.Typora安装</h2><blockquote><p>直接傻瓜式的下一步就好，注意修改目录到自己想要的位置。</p><p>如果你使用旧版激活方法，安装旧版激活工具中提供的软件安装包</p></blockquote><h2 id="3-Typora的激活"><a href="#3-Typora的激活" class="headerlink" title="3.Typora的激活"></a>3.Typora的激活</h2><h3 id="3-1-新版激活方法"><a href="#3-1-新版激活方法" class="headerlink" title="3.1 新版激活方法"></a>3.1 新版激活方法</h3><blockquote><ol><li><p>将激活工具解压到Typora的根目录下</p></li><li><p>在Typora的安装目录中运行cmd</p></li><li><p>使用ls命令查看激活工具是否已经解压到目录下</p></li><li><p>运行node_inject.exe命令，时间会有些长，直至出现done！即可完成</p><p><img src="/2025/05/22/Typora%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E6%BF%80%E6%B4%BB/1.png" alt="执行node-inject命令"></p></li><li><p>运行license-gen.exe命令，就会得到激活码</p><p><img src="/2025/05/22/Typora%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E6%BF%80%E6%B4%BB/2.png" alt="执行node-inject命令"></p></li><li><p>不关闭上面页面，运行软件Typora，并填写相应的激活信息</p><p><img src="/2025/05/22/Typora%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E6%BF%80%E6%B4%BB/3.png" alt="填写激活信息"></p></li><li><p>完成激活，激活之后一定不要点更新，如果更新了软件，激活则会失效，需要卸载软件后重新安装激活，有时会出现无法激活的问题，可以使用旧版激活方法。</p><p><img src="/2025/05/22/Typora%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E6%BF%80%E6%B4%BB/4.png" alt="完成"></p></li></ol></blockquote><h3 id="3-2-旧版激活方法"><a href="#3-2-旧版激活方法" class="headerlink" title="3.2 旧版激活方法"></a>3.2 旧版激活方法</h3><blockquote><ol><li>下载并安装旧版激活工具中的Typora软件</li><li>完成安装后，将激活工具中的app.asar复制到软件安装目录下的resources文件夹中并替换掉原有的文件</li></ol></blockquote>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 软件安装 </tag>
+            
+            <tag> 软件激活 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+    
+    
+    <entry>
+      <title></title>
+      <link href="/test.html"/>
+      <url>/test.html</url>
+      
+        <content type="html"><![CDATA[<h1>Hello Pug!</h1><p>This is a test.</p>]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>分类</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/css/test.css"/>
+      <url>/css/test.css</url>
+      
+        <content type="html"><![CDATA[body {  color: #333;}]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>标签</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+  
+</search>
