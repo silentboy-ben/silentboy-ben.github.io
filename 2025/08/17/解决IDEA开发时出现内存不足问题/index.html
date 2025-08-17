@@ -1,0 +1,255 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>解决IDEA开发时出现内存不足问题 | silent</title><meta name="author" content="silentboy"><meta name="copyright" content="silentboy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="解决IDEA开发时出现内存不足问题 在工作的开发过程中,IDEA提示:IDE 内存不足，这可能会影响性能。请考虑增加堆大小。  该问题通常由多种因素共同作用导致,以下是一些常见原因:  默认堆内存设置过小 ​    大多数的IDE都会预设一个默认的堆内存上限,如果项目规模过大（代码量过多、依赖库过多），默认设置无法满足需求，导致内存占用会超过上限。  项目规模过大 ​    项目包含数万甚至数十万">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决IDEA开发时出现内存不足问题">
+<meta property="og:url" content="https://silentboy-ben.github.io/2025/08/17/%E8%A7%A3%E5%86%B3IDEA%E5%BC%80%E5%8F%91%E6%97%B6%E5%87%BA%E7%8E%B0%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E9%97%AE%E9%A2%98/">
+<meta property="og:site_name" content="silent">
+<meta property="og:description" content="解决IDEA开发时出现内存不足问题 在工作的开发过程中,IDEA提示:IDE 内存不足，这可能会影响性能。请考虑增加堆大小。  该问题通常由多种因素共同作用导致,以下是一些常见原因:  默认堆内存设置过小 ​    大多数的IDE都会预设一个默认的堆内存上限,如果项目规模过大（代码量过多、依赖库过多），默认设置无法满足需求，导致内存占用会超过上限。  项目规模过大 ​    项目包含数万甚至数十万">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://silentboy-ben.github.io/images/profile%20picture.png">
+<meta property="article:published_time" content="2025-08-17T02:49:00.000Z">
+<meta property="article:modified_time" content="2025-08-17T09:46:09.158Z">
+<meta property="article:author" content="silentboy">
+<meta property="article:tag" content="IDEA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://silentboy-ben.github.io/images/profile%20picture.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "解决IDEA开发时出现内存不足问题",
+  "url": "https://silentboy-ben.github.io/2025/08/17/%E8%A7%A3%E5%86%B3IDEA%E5%BC%80%E5%8F%91%E6%97%B6%E5%87%BA%E7%8E%B0%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E9%97%AE%E9%A2%98/",
+  "image": "https://silentboy-ben.github.io/images/profile%20picture.png",
+  "datePublished": "2025-08-17T02:49:00.000Z",
+  "dateModified": "2025-08-17T09:46:09.158Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "silentboy",
+      "url": "https://silentboy-ben.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://silentboy-ben.github.io/2025/08/17/%E8%A7%A3%E5%86%B3IDEA%E5%BC%80%E5%8F%91%E6%97%B6%E5%87%BA%E7%8E%B0%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E9%97%AE%E9%A2%98/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":230,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '解决IDEA开发时出现内存不足问题',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(url(https://github.com/silentboy-ben/silentboy-ben.github.io/blob/main/images/background.png));"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/profile%20picture.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/search/"><i class="fa-fw fas fa-search"></i><span> 搜索</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">silent</span></a><a class="nav-page-title" href="/"><span class="site-name">解决IDEA开发时出现内存不足问题</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/search/"><i class="fa-fw fas fa-search"></i><span> 搜索</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">解决IDEA开发时出现内存不足问题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-08-17T02:49:00.000Z" title="发表于 2025-08-17 10:49:00">2025-08-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-08-17T09:46:09.158Z" title="更新于 2025-08-17 17:46:09">2025-08-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:365,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-08-17 17:46:09&quot;}" hidden></div><h1 id="解决IDEA开发时出现内存不足问题"><a href="#解决IDEA开发时出现内存不足问题" class="headerlink" title="解决IDEA开发时出现内存不足问题"></a>解决IDEA开发时出现内存不足问题</h1><blockquote>
+<p>在工作的开发过程中,IDEA提示:IDE 内存不足，这可能会影响性能。请考虑增加堆大小。</p>
+</blockquote>
+<p>该问题通常由多种因素共同作用导致,以下是一些常见原因:</p>
+<ol>
+<li><p>默认堆内存设置过小</p>
+<p>​    大多数的IDE都会预设一个默认的堆内存上限,如果项目规模过大（代码量过多、依赖库过多），默认设置无法满足需求，导致内存占用会超过上限。</p>
+</li>
+<li><p>项目规模过大</p>
+<p>​    项目包含数万甚至数十万行代码，IDE需要加载和解析大量文件，消耗大量内存</p>
+<p>​    项目的依赖库过多或体积过大，IDE索引这些依赖时会占用大量内存。</p>
+</li>
+<li><p>同时打开多个项目或者文件</p>
+<p>​    同时在IDE中打开多个大型项目或在单个项目中打开数百个文件，会导致IDE为每个文件维持语法分析、缓存等数据，累积占用大量内存。</p>
+</li>
+<li><p>插件或扩展过多</p>
+<p>​    安装的插件会在后台运行并占用内存,部分插件优化不佳时,也会导致过度消耗内存资源</p>
+</li>
+<li><p>长时间运行</p>
+<p>​    长时间运行后内存占用会逐渐累积，最终超过堆内存上限</p>
+</li>
+<li><p>某些语言或框架的特性</p>
+<p>​    Java语言的IDE需要加载虚拟机环境和大量类型信息</p>
+<p>​    Spring框架复杂配置解析也会增加内存消耗</p>
+</li>
+</ol>
+<p>解决方法：</p>
+<ol>
+<li><p>调整IDE堆内存大小</p>
+<ol>
+<li><p>通过IDE内置设置调整</p>
+<p>点击Help（帮助）–&gt;Edit Custom VM Options（编辑自定义虚拟机选项）</p>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2025/05/30/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/image-20250817155236165.png" alt="alt text"></p>
+<pre><code>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始堆内存大小(JVM启动时分配的内存)，建议设为物理内存的1/8</span></span><br><span class="line">-Xms128m</span><br><span class="line"><span class="comment">// 最大堆内存上线(JVM运行中能使用的最大内存)，建议设为物理内存的1/4</span></span><br><span class="line">-Xmx1024m</span><br><span class="line"><span class="comment">// 预留代码缓存大小，代码缓存不足时会导致JIT编译效率下降</span></span><br><span class="line">-XX:ReservedCodeCacheSize=512m</span><br><span class="line"><span class="comment">// 避免因JDK版本差异导致的启动失败</span></span><br><span class="line">-XX:+IgnoreUnrecognizedVMOptions</span><br><span class="line"><span class="comment">// 启用G1垃圾收集器，能高效回收内存并减少卡顿</span></span><br><span class="line">-XX:+UseG1GC</span><br><span class="line"><span class="comment">// 软引用对象的回收策略1，内存不足时会被优先回收</span></span><br><span class="line">-XX:SoftRefLRUPolicyMSPerMB=<span class="number">50</span></span><br><span class="line"><span class="comment">// 限制编译器线程数量，避免线程过多导致CPU竞争</span></span><br><span class="line">-XX:CICompilerCount=<span class="number">2</span></span><br><span class="line"><span class="comment">// 当发生内存溢出时，会自动生成堆内存快照(.hprof)，便于事后分析原因</span></span><br><span class="line">-XX:+HeapDumpOnOutOfMemoryError</span><br><span class="line"><span class="comment">// 禁用快速抛出异常时省略堆栈跟踪，即使频繁抛出异常(如空指针)也能打印完整堆栈，便于调试</span></span><br><span class="line">-XX:-OmitStackTraceInFastThrow</span><br><span class="line"><span class="comment">// 断言机制，验证逻辑正确性</span></span><br><span class="line">-ea</span><br><span class="line"><span class="comment">// 禁用Sun IO包的规范路径缓存，避免某些文件系统环境下的路径缓存导致的文件状态不一致问题</span></span><br><span class="line">-Dsun.io.useCanonCaches=<span class="literal">false</span></span><br><span class="line"><span class="comment">// 允许所有HTTP代理认证方案，解决特定代理环境下的认证失败问题</span></span><br><span class="line">-Djdk.http.auth.tunneling.disabledSchemes=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="comment">// 允许JVM进程自身附加到自己的调试器，支持IDE自身的调试功能(如插件调试)</span></span><br><span class="line">-Djdk.attach.allowAttachSelf=<span class="literal">true</span></span><br><span class="line"><span class="comment">// 对模块间的非法访问(如反射调用)不打印警告日志，减少 JDK 9+ 模块系统带来的冗余警告（某些旧插件可能依赖非法访问）</span></span><br><span class="line">-Djdk.<span class="keyword">module</span>.illegalAccess.silent=<span class="literal">true</span></span><br><span class="line"><span class="comment">// 禁用 Kotlin 协程的调试模式，减少调试信息带来的性能开销（生产环境通常关闭）</span></span><br><span class="line">-Dkotlinx.coroutines.debug=off</span><br><span class="line"><span class="comment">// 指定 JVM 致命错误日志的输出路径（%p 表示进程 ID），记录崩溃等严重错误，便于排查问题</span></span><br><span class="line">-XX:ErrorFile=$USER_HOME/java_error_in_idea_%p.log</span><br><span class="line"><span class="comment">// 指定内存溢出时堆快照的保存路径，与 HeapDumpOnOutOfMemoryError 配合，生成的快照文件用于分析内存问题</span></span><br><span class="line">-XX:HeapDumpPath=$USER_HOME/java_error_in_idea.hprof</span><br><span class="line"></span><br><span class="line"><span class="comment">// 允许未命名模块（如 IDE 自身代码）访问 java.base 模块中的 org.objectweb.asm 内部包，决 JDK 9+ 模块系统的访问限制，确保 IDE 依赖的字节码操作库（ASM）能正常工作</span></span><br><span class="line">--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED</span><br><span class="line">--add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED</span><br></pre></td></tr></table></figure>
+  
+  修改-Xmx项，将其增大，保存后重启软件生效
+  
+</code></pre>
+<ol start="2">
+<li><p>手动修改配置文件</p>
+<p>​    如果因为内存不足导致软件崩溃，可直接找到配置文件进行修改<br>​    IDEA：安装目录&#x2F;bin&#x2F;idea64.exe.vmoptions</p>
+</li>
+</ol>
+<p><img src="/2025/05/30/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/image-20250817104739135.png" alt="alt text"></p>
+<pre><code>  找到-Xmx项，将其值增大即可。
+</code></pre>
+<ol start="2">
+<li><p>减少IDE内存占用</p>
+<ol>
+<li><p>关闭不必要的功能和插件</p>
+</li>
+<li><p>限制同时打开的项目和文件</p>
+</li>
+<li><p>定期清理缓存</p>
+<p>File(文件)–&gt; Invalidate Caches(使缓存失效)</p>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2025/05/30/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/image-20250817160317746.png" alt="alt text"></p>
+<blockquote>
+<p>小知识：</p>
+<p>Clear file system cache and Local History(清除文件系统缓存和本地历史记录)：<br>	作用：删除虚拟文件系统缓存以及存储在本地历史中的信息。虚拟文件系统缓存用于加速文件操作，本地历史记录则记录了文件的更改历史。当常规的缓存失效不足以解决问题时，比如遇到文件显示异常或本地历史记录混乱等情况，勾选此选项可能会有帮助。</p>
+<p>​	勾选建议：缓存失效不足以解决问题时，能有助于进行故障排除。如果确定不需要本地历史记录，或者本地历史记录已导致问题，可以勾选。否则，建议谨慎选择，因为清除后将无法恢复本地历史记录。</p>
+<p>Clear VCS Log caches and indexes(清除VCS日志缓存和索引)：</p>
+<p>​	作用：删除VSC日志的缓存和索引</p>
+<p>​	勾选建议：确定VCS日志索引已损坏，例如日志所有无法正常工作，重启此选项</p>
+<p>Mark downloaded shared indexes as excluded(将下载的共享索引标记为已损坏)：</p>
+<p>​	作用：清楚下载的共享指数并将其放入排除文件列表中。IDEA将不会重新下载被排除的共享索引。</p>
+<p>​	勾选建议：如果遇到与共享索引相关的问题，如代码提示不准确等，可以勾选。</p>
+<p>Ask before downloading new shared indexes(下载新的共享索引前询问)：</p>
+<p>​	作用：显示一条通知，提示在新共享索引可用时下载</p>
+<p>​	勾选建议：对共享索引的下载有更多控制权，可以勾选</p>
+<p>Delete embedded browser engine cache and cookies(删除嵌入式浏览器引擎缓存和 Cookie)：</p>
+<p>​	作用：删除存储在内置JCEF浏览器中的缓存文件和Cookie</p>
+<p>​	勾选建议：这些文件很少被破坏。此选项允许您在保持JCEF Cookie和缓存完整的同时使缓存无效。</p>
+<p>Just restart(重启)：</p>
+<p>​	作用：不会删除缓存文件，也不会应用所轩的可选操作</p>
+<p>Invalidate and Restart(失效并重启)：</p>
+<p>​	作用：如果不勾选上面的选项，只点击Invalidate and Restart，IDEA会清除所有项目的缓存文件，并在重启后重新构建这些缓存。</p>
+</blockquote>
+<ol start="3">
+<li><p>优化环境</p>
+<ol>
+<li>关闭其他占用内存的程序</li>
+<li>物理层面解决问题，增加内存</li>
+</ol>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://silentboy-ben.github.io">silentboy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://silentboy-ben.github.io/2025/08/17/%E8%A7%A3%E5%86%B3IDEA%E5%BC%80%E5%8F%91%E6%97%B6%E5%87%BA%E7%8E%B0%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E9%97%AE%E9%A2%98/">https://silentboy-ben.github.io/2025/08/17/%E8%A7%A3%E5%86%B3IDEA%E5%BC%80%E5%8F%91%E6%97%B6%E5%87%BA%E7%8E%B0%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E9%97%AE%E9%A2%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://silentboy-ben.github.io" target="_blank">silent</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/IDEA/">IDEA</a></div><div class="post-share"><div class="social-share" data-image="/images/profile%20picture.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/08/02/Lombok%E6%B3%A8%E8%A7%A3%E7%9A%84%E9%85%8D%E7%BD%AE%E5%8F%8A%E4%BD%BF%E7%94%A8/" title="Lombok注解的配置及使用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Lombok注解的配置及使用</div></div><div class="info-2"><div class="info-item-1">Lombok注解的配置及使用 Lombok是一个Java库，通过注解的方式简化Java代码的编写，减少样板代码(如getter&#x2F;setter、构造方法、toString()等)，提高开发效率。开发者只需关注业务逻辑。  1.安装Lombok插件1.Eclipse Eclipse本身是没有Lombok插件，即使项目中引入了Lombok依赖也无法正常使用Lombok注解。此时只能借助Lombok.jar进行引入。  1.1下载Lombok.jar包Lombok.jar下载  1.2安装jar包在lombok.jar所在的文件下运行cmd(尽量确保路径没有中文，防止出错)  执行java命令运行jar文件(系统必须安装了JRE环境才可执行java命令) 1java -jar lombok.jar  会打开如图所示的lombok插件窗口  发现提示我们并未找到我们所安装的Eclipse，如果你已安装了Eclipse，点击Specify...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/profile%20picture.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">silentboy</div><div class="author-info-description">咸鱼不焦虑，因为它早就腌入味了</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/silentboy-ben"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/silentboy-ben" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3IDEA%E5%BC%80%E5%8F%91%E6%97%B6%E5%87%BA%E7%8E%B0%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E9%97%AE%E9%A2%98"><span class="toc-text">解决IDEA开发时出现内存不足问题</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/17/%E8%A7%A3%E5%86%B3IDEA%E5%BC%80%E5%8F%91%E6%97%B6%E5%87%BA%E7%8E%B0%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E9%97%AE%E9%A2%98/" title="解决IDEA开发时出现内存不足问题">解决IDEA开发时出现内存不足问题</a><time datetime="2025-08-17T02:49:00.000Z" title="发表于 2025-08-17 10:49:00">2025-08-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/02/Lombok%E6%B3%A8%E8%A7%A3%E7%9A%84%E9%85%8D%E7%BD%AE%E5%8F%8A%E4%BD%BF%E7%94%A8/" title="Lombok注解的配置及使用">Lombok注解的配置及使用</a><time datetime="2025-08-02T08:46:00.000Z" title="发表于 2025-08-02 16:46:00">2025-08-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/13/%E5%85%B3%E4%BA%8EIDEA%E5%92%8CPyCharm%E5%90%8C%E6%97%B6%E5%AE%89%E8%A3%85%EF%BC%8C%E7%94%A8%E5%90%8C%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95%E7%A0%B4%E8%A7%A3%E5%90%8E%E5%AF%BC%E8%87%B4%E5%85%B6%E4%B8%AD%E4%B8%80%E4%B8%AA%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E6%88%96%E6%97%A0%E6%B3%95%E7%A0%B4%E8%A7%A3%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" title="关于IDEA和PyCharm同时安装，用同一种方法破解后导致其中一个无法使用或无法破解的解决办法">关于IDEA和PyCharm同时安装，用同一种方法破解后导致其中一个无法使用或无法破解的解决办法</a><time datetime="2025-07-13T12:34:00.000Z" title="发表于 2025-07-13 20:34:00">2025-07-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/30/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/" title="无标题">无标题</a><time datetime="2025-05-30T03:42:35.177Z" title="发表于 2025-05-30 11:42:35">2025-05-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/22/Typora%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E6%BF%80%E6%B4%BB/" title="Typora的安装与激活">Typora的安装与激活</a><time datetime="2025-05-22T09:43:13.000Z" title="发表于 2025-05-22 17:43:13">2025-05-22</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2025 By silentboy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
