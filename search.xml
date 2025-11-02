@@ -95,19 +95,6 @@
     
     
     <entry>
-      <title></title>
-      <link href="/2025/05/30/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/"/>
-      <url>/2025/05/30/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80)/</url>
-      
-        <content type="html"><![CDATA[<p>常用的一些注解</p><p>@SpringBootApplication</p><p>@RestController包含了@Controller和@ResponseBody</p><p>@Controller：负责处理HTTP请求并返回响应</p><p>@ResponseBodt：将返回的数据结构转换为Json格式</p><p>spring-boot-starter-json是Spring Boot默认提供依赖</p><p>spring-boot-starter-json包含在spring-boot-starter-web，spring-boot-starter-web继承自spring-boot-starter-parent</p><p>spring-boot-starter-parent：提供默认依赖管理和插件配置</p><p>spring-boot-starter-web：包含了</p><ul><li><code>spring-boot-starter-json</code>（提供 Jackson 库，处理 JSON）</li><li><code>spring-boot-starter-tomcat</code>（内嵌 Tomcat）</li><li><code>spring-web</code> 和 <code>spring-webmvc</code>（Spring MVC 核心）</li></ul>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Typora的安装与激活</title>
       <link href="/2025/05/22/Typora%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E6%BF%80%E6%B4%BB/"/>
       <url>/2025/05/22/Typora%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E6%BF%80%E6%B4%BB/</url>
@@ -143,17 +130,6 @@
     
     
     <entry>
-      <title>标签</title>
-      <link href="/tags/index.html"/>
-      <url>/tags/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>分类</title>
       <link href="/categories/index.html"/>
       <url>/categories/index.html</url>
@@ -170,6 +146,17 @@
       <url>/css/test.css</url>
       
         <content type="html"><![CDATA[body {  color: #333;}]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>标签</title>
+      <link href="/tags/index.html"/>
+      <url>/tags/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
       
     </entry>
     
