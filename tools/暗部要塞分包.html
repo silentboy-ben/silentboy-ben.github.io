@@ -1,0 +1,1399 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>silent | silent</title><meta name="author" content="silentboy"><meta name="copyright" content="silentboy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="要塞分包系统                   * {             margin: 0;             padding: 0;             box-sizing: border-box;             font-family: &#39;Segoe UI&#39;, &#39;Microsoft YaHei&#39;, sans-serif;">
+<meta property="og:type" content="website">
+<meta property="og:title" content="silent">
+<meta property="og:url" content="https://silentboy-ben.github.io/tools/%E6%9A%97%E9%83%A8%E8%A6%81%E5%A1%9E%E5%88%86%E5%8C%85">
+<meta property="og:site_name" content="silent">
+<meta property="og:description" content="要塞分包系统                   * {             margin: 0;             padding: 0;             box-sizing: border-box;             font-family: &#39;Segoe UI&#39;, &#39;Microsoft YaHei&#39;, sans-serif;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://silentboy-ben.github.io/images/profile%20picture.png">
+<meta property="article:published_time" content="2025-12-20T15:34:23.682Z">
+<meta property="article:modified_time" content="2025-12-20T15:34:23.682Z">
+<meta property="article:author" content="silentboy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://silentboy-ben.github.io/images/profile%20picture.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://silentboy-ben.github.io/tools/%E6%9A%97%E9%83%A8%E8%A6%81%E5%A1%9E%E5%88%86%E5%8C%85"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":230,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'silent',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'page'
+}</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(url(https://github.com/silentboy-ben/silentboy-ben.github.io/blob/main/images/background.png));"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/profile%20picture.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/search/"><i class="fa-fw fas fa-search"></i><span> 搜索</span></a></div><div class="menus_item"><span class="site-page group"><span> 分包工具</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tools/%E6%9A%97%E9%83%A8%E8%A6%81%E5%A1%9E%E5%88%86%E5%8C%85"><i class="fa-fw fa fa-box-open"></i><span> 暗部</span></a></li><li><a class="site-page child" href="/tools/%E6%98%A5%E8%8B%8F%E8%A6%81%E5%A1%9E%E5%88%86%E5%8C%85"><i class="fa-fw fa fa-boxes-stacked"></i><span> 春苏</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">silent</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><span> 文章</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/search/"><i class="fa-fw fas fa-search"></i><span> 搜索</span></a></div><div class="menus_item"><span class="site-page group"><span> 分包工具</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/tools/%E6%9A%97%E9%83%A8%E8%A6%81%E5%A1%9E%E5%88%86%E5%8C%85"><i class="fa-fw fa fa-box-open"></i><span> 暗部</span></a></li><li><a class="site-page child" href="/tools/%E6%98%A5%E8%8B%8F%E8%A6%81%E5%A1%9E%E5%88%86%E5%8C%85"><i class="fa-fw fa fa-boxes-stacked"></i><span> 春苏</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title"></h1></div></header><main class="layout" id="content-inner"><div id="page"><div class="container" id="article-container"><!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>要塞分包系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(to right, #4b6cb7, #182848);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+            border-bottom: 5px solid #ff6b6b;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        h1 i {
+            color: #ffd166;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 25px;
+        }
+
+        .left-panel {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 25px;
+            border-right: 1px solid #eaeaea;
+        }
+
+        .right-panel {
+            flex: 2;
+            min-width: 500px;
+            padding-left: 25px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4b6cb7;
+        }
+
+        .section-title i {
+            color: #4b6cb7;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input,
+        select,
+        button {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #4b6cb7;
+            box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.2);
+        }
+
+        .btn {
+            background: linear-gradient(to right, #4b6cb7, #3a56a4);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to right, #3a56a4, #2a4684);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, #4b6cb7, #182848);
+            padding: 15px;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(to right, #6c757d, #5a6268);
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        .btn-success {
+            background: linear-gradient(to right, #28a745, #1e7e34);
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        .btn-danger {
+            background: linear-gradient(to right, #dc3545, #c82333);
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        .btn-add {
+            background: linear-gradient(to right, #17a2b8, #138496);
+            padding: 10px 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(to right, #4b6cb7, #3a56a4);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f0f5ff;
+        }
+
+        .result-cell {
+            font-weight: 600;
+        }
+
+        .result-cell.zero {
+            color: #999;
+        }
+
+        .result-cell.non-zero {
+            color: #2c3e50;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border-top: 4px solid #4b6cb7;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #182848;
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border-left: 5px solid #28a745;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 5px solid #dc3545;
+        }
+
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border-left: 5px solid #ffc107;
+        }
+
+        .validation-results {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .validation-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .validation-item.success i {
+            color: #28a745;
+        }
+
+        .validation-item.error i {
+            color: #dc3545;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #4b6cb7;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .csv-preview {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #eaeaea;
+            margin-top: 30px;
+        }
+
+        /* 新增：人员需求录入表格样式 */
+        .person-table {
+            margin-bottom: 15px;
+        }
+
+        .person-table td input {
+            width: 100%;
+        }
+
+        .person-table .btn-danger {
+            padding: 8px 12px;
+            font-size: 0.8rem;
+        }
+
+        .total-demand {
+            margin-top: 10px;
+            font-weight: 600;
+            color: #2c3e50;
+            text-align: right;
+        }
+
+        @media (max-width: 1100px) {
+            .content {
+                flex-direction: column;
+            }
+
+            .left-panel,
+            .right-panel {
+                padding: 0;
+                border: none;
+                width: 100%;
+            }
+
+            .left-panel {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th,
+            td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-box-open"></i> 暗部要塞分包系统</h1>
+        </header>
+
+        <div class="content">
+            <div class="left-panel">
+                <!-- 新增：人员需求录入面板 -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-user-edit"></i>
+                        <h2>人员需求录入</h2>
+                    </div>
+
+                    <div style="overflow-x: auto;">
+                        <table id="person-demand-table" class="person-table">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>人员姓名</th>
+                                    <th>需求包数</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- 初始人员数据将在这里动态生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <button id="add-person-btn" class="btn btn-add">
+                        <i class="fas fa-plus"></i> 添加人员
+                    </button>
+
+                    <div class="total-demand">
+                        总需求包数: <span id="total-demand-value">0</span>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-cog"></i>
+                        <h2>分配参数设置</h2>
+                    </div>
+
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="days"><i class="fas fa-calendar-alt"></i> 分配天数</label>
+                            <input type="number" id="days" min="1" max="30" value="8">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="daily-total"><i class="fas fa-box"></i> 每天总量</label>
+                            <input type="number" id="daily-total" min="1" max="100" value="15">
+                        </div>
+
+                        <div class="input-group">
+                            <label for="max-per-day"><i class="fas fa-user-check"></i> 每人每天最多</label>
+                            <input type="number" id="max-per-day" min="1" max="10" value="3">
+                        </div>
+                    </div>
+
+                    <button id="solve-btn" class="btn btn-primary">
+                        <i class="fas fa-calculator"></i> 求解分配方案
+                    </button>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-clipboard-check"></i>
+                        <h2>验证结果</h2>
+                    </div>
+
+                    <div id="validation-results" class="validation-results">
+                        <!-- 验证结果将在这里显示 -->
+                    </div>
+
+                    <div id="validation-alert" class="alert" style="display: none;">
+                        <!-- 验证提示将在这里显示 -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-table"></i>
+                        <h2>分配结果</h2>
+                    </div>
+
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <p>正在求解线性规划问题，请稍候...</p>
+                    </div>
+
+                    <div id="result-container" style="display: none;">
+                        <div class="buttons">
+                            <button id="export-csv" class="btn btn-success">
+                                <i class="fas fa-file-csv"></i> 导出CSV
+                            </button>
+                            <button id="reset-btn" class="btn btn-secondary">
+                                <i class="fas fa-redo"></i> 重置数据
+                            </button>
+                            <button id="copy-table" class="btn btn-danger">
+                                <i class="fas fa-copy"></i> 复制表格
+                            </button>
+                        </div>
+
+                        <div id="result-table-container" style="overflow-x: auto; margin-top: 20px;">
+                            <!-- 结果表格将在这里显示 -->
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">
+                                <i class="fas fa-chart-bar"></i>
+                                <h2>统计信息</h2>
+                            </div>
+
+                            <div id="stats-container" class="stats">
+                                <!-- 统计卡片将在这里显示 -->
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">
+                                <i class="fas fa-file-code"></i>
+                                <h2>CSV预览</h2>
+                            </div>
+
+                            <div id="csv-preview" class="csv-preview">
+                                <!-- CSV预览将在这里显示 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 引入线性规划库 -->
+    <script src="https://unpkg.com/javascript-lp-solver@0.4.24/prod/solver.js"></script>
+
+    <script>
+        // 初始化数据
+        let names = [];
+        let demands = [];
+        let days = 8;
+        let dailyTotal = 15;
+        let maxPerDay = 3;
+
+        // 默认初始化的人员数据（可自定义）
+        const defaultPersonData = [
+            { name: "小猫", demand: 11 },
+            { name: "辉哥", demand: 19 },
+            { name: "江上", demand: 23 },
+            { name: "摸的飞快", demand: 18 },
+            { name: "千寒", demand: 2 },
+            { name: "秋风", demand: 8 },
+            { name: "平凡", demand: 11 },
+            { name: "上仙", demand: 11 },
+            { name: "神威", demand: 17 }
+        ];
+
+        // DOM元素
+        const personDemandTable = document.getElementById('person-demand-table').querySelector('tbody');
+        const addPersonBtn = document.getElementById('add-person-btn');
+        const totalDemandValue = document.getElementById('total-demand-value');
+        const daysInput = document.getElementById('days');
+        const dailyTotalInput = document.getElementById('daily-total');
+        const maxPerDayInput = document.getElementById('max-per-day');
+        const solveBtn = document.getElementById('solve-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const exportCsvBtn = document.getElementById('export-csv');
+        const copyTableBtn = document.getElementById('copy-table');
+        const loadingElement = document.getElementById('loading');
+        const resultContainer = document.getElementById('result-container');
+        const resultTableContainer = document.getElementById('result-table-container');
+        const statsContainer = document.getElementById('stats-container');
+        const csvPreview = document.getElementById('csv-preview');
+        const validationResults = document.getElementById('validation-results');
+        const validationAlert = document.getElementById('validation-alert');
+
+        // 初始化人员表格
+        function initPersonTable() {
+            // 清空表格
+            personDemandTable.innerHTML = '';
+
+            // 加载默认数据
+            defaultPersonData.forEach((item, index) => {
+                addPersonRow(index + 1, item.name, item.demand);
+            });
+
+            // 更新总需求
+            updateTotalDemand();
+
+            // 同步到全局数组
+            syncPersonData();
+        }
+
+        // 添加人员行
+        function addPersonRow(serial, name, demand) {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${serial}</td>
+                <td><input type="text" class="person-name" value="${name || ''}" placeholder="请输入姓名"></td>
+                <td><input type="number" class="person-demand" min="0" value="${demand || 0}" placeholder="0"></td>
+                <td><button class="btn btn-danger delete-person-btn"><i class="fas fa-trash"></i> 删除</button></td>
+            `;
+
+            // 删除按钮事件
+            tr.querySelector('.delete-person-btn').addEventListener('click', function () {
+                tr.remove();
+                // 重新排序序号
+                reorderSerialNumbers();
+                // 更新总需求
+                updateTotalDemand();
+                // 同步数据
+                syncPersonData();
+            });
+
+            // 姓名输入事件
+            tr.querySelector('.person-name').addEventListener('input', function () {
+                syncPersonData();
+            });
+
+            // 需求数输入事件
+            tr.querySelector('.person-demand').addEventListener('input', function () {
+                updateTotalDemand();
+                syncPersonData();
+            });
+
+            personDemandTable.appendChild(tr);
+        }
+
+        // 重新排序序号
+        function reorderSerialNumbers() {
+            const rows = personDemandTable.querySelectorAll('tr');
+            rows.forEach((row, index) => {
+                row.querySelector('td:first-child').textContent = index + 1;
+            });
+        }
+
+        // 更新总需求
+        function updateTotalDemand() {
+            const demandInputs = personDemandTable.querySelectorAll('.person-demand');
+            let total = 0;
+            demandInputs.forEach(input => {
+                total += parseInt(input.value) || 0;
+            });
+            totalDemandValue.textContent = total;
+        }
+
+        // 同步人员数据到全局数组
+        function syncPersonData() {
+            names = [];
+            demands = [];
+
+            const rows = personDemandTable.querySelectorAll('tr');
+            rows.forEach(row => {
+                const name = row.querySelector('.person-name').value.trim() || `未命名${rows.length + 1}`;
+                const demand = parseInt(row.querySelector('.person-demand').value) || 0;
+
+                names.push(name);
+                demands.push(demand);
+            });
+        }
+
+        // 更新参数
+        function updateParameters() {
+            days = parseInt(daysInput.value);
+            dailyTotal = parseInt(dailyTotalInput.value);
+            maxPerDay = parseInt(maxPerDayInput.value);
+            // 人员数据已通过syncPersonData同步
+        }
+
+        // 使用线性规划求解
+        function solveDistribution() {
+            // 同步最新的人员数据
+            syncPersonData();
+
+            // 验证基本条件
+            const totalDemand = demands.reduce((a, b) => a + b, 0);
+            const totalCapacity = days * dailyTotal;
+
+            if (totalDemand > totalCapacity) {
+                validationAlert.innerHTML = `
+                    <i class="fas fa-exclamation-triangle fa-2x"></i>
+                    <div>
+                        <strong>❌ 总需求超过总容量</strong><br>
+                        总需求: ${totalDemand}个，总容量: ${days}天 × ${dailyTotal}个 = ${totalCapacity}个<br>
+                        请调整需求数或分配参数！
+                    </div>
+                `;
+                validationAlert.className = 'alert alert-danger';
+                validationAlert.style.display = 'flex';
+                return;
+            }
+
+            // 显示加载中
+            loadingElement.style.display = 'block';
+            resultContainer.style.display = 'none';
+            validationResults.innerHTML = '';
+            validationAlert.style.display = 'none';
+
+            // 更新参数
+            updateParameters();
+
+            // 使用setTimeout让UI有机会更新
+            setTimeout(() => {
+                try {
+                    // 准备线性规划模型
+                    const model = {
+                        optimize: "none", // 我们只需要可行解
+                        opType: "min",
+                        constraints: {},
+                        variables: {},
+                        ints: {}
+                    };
+
+                    // 为每个人每天创建变量
+                    const variables = {};
+
+                    for (let i = 0; i < names.length; i++) {
+                        for (let j = 0; j < days; j++) {
+                            const varName = `x_${i}_${j}`;
+                            variables[varName] = {};
+                            model.ints[varName] = 1; // 整数变量
+                        }
+                    }
+
+                    // 添加约束：每人每天最多分配 maxPerDay 个
+                    for (let i = 0; i < names.length; i++) {
+                        for (let j = 0; j < days; j++) {
+                            const varName = `x_${i}_${j}`;
+                            model.constraints[`max_${i}_${j}`] = { max: maxPerDay };
+                            variables[varName][`max_${i}_${j}`] = 1;
+                        }
+                    }
+
+                    // 添加约束：每人总需求
+                    for (let i = 0; i < names.length; i++) {
+                        model.constraints[`total_${i}`] = { equal: demands[i] };
+
+                        for (let j = 0; j < days; j++) {
+                            const varName = `x_${i}_${j}`;
+                            variables[varName][`total_${i}`] = 1;
+                        }
+                    }
+
+                    // 添加约束：每天总量
+                    for (let j = 0; j < days; j++) {
+                        model.constraints[`day_${j}`] = { equal: dailyTotal };
+
+                        for (let i = 0; i < names.length; i++) {
+                            const varName = `x_${i}_${j}`;
+                            variables[varName][`day_${j}`] = 1;
+                        }
+                    }
+
+                    // 设置变量
+                    model.variables = variables;
+
+                    // 求解线性规划问题
+                    const results = solver.Solve(model);
+
+                    // 检查是否找到可行解
+                    if (results.feasible) {
+                        // 提取分配结果
+                        const allocation = [];
+                        for (let i = 0; i < names.length; i++) {
+                            const personAllocation = [];
+                            let personTotal = 0;
+
+                            for (let j = 0; j < days; j++) {
+                                const varName = `x_${i}_${j}`;
+                                const value = Math.round(results[varName] || 0);
+                                personAllocation.push(value);
+                                personTotal += value;
+                            }
+
+                            allocation.push({
+                                name: names[i],
+                                daily: personAllocation,
+                                total: personTotal,
+                                demand: demands[i]
+                            });
+                        }
+
+                        // 计算每日总计
+                        const dailyTotals = [];
+                        for (let j = 0; j < days; j++) {
+                            let dayTotal = 0;
+                            for (let i = 0; i < names.length; i++) {
+                                dayTotal += allocation[i].daily[j];
+                            }
+                            dailyTotals.push(dayTotal);
+                        }
+
+                        // 显示结果
+                        displayResults(allocation, dailyTotals);
+
+                        // 验证结果
+                        validateResults(allocation, dailyTotals);
+
+                        // 生成CSV预览
+                        generateCsvPreview(allocation, dailyTotals);
+
+                    } else {
+                        // 没有找到可行解
+                        loadingElement.style.display = 'none';
+                        validationAlert.innerHTML = `
+                            <i class="fas fa-exclamation-triangle fa-2x"></i>
+                            <div>
+                                <strong>❌ 未找到可行解</strong><br>
+                                可能的原因：<br>
+                                1. 总需求超过总容量 (${days}天 × ${dailyTotal}个 = ${days * dailyTotal}个)<br>
+                                2. 单日分配容量不足<br>
+                                3. 约束条件过于严格
+                            </div>
+                        `;
+                        validationAlert.className = 'alert alert-danger';
+                        validationAlert.style.display = 'flex';
+                    }
+
+                } catch (error) {
+                    console.error('求解错误:', error);
+                    loadingElement.style.display = 'none';
+                    validationAlert.innerHTML = `
+                        <i class="fas fa-exclamation-circle fa-2x"></i>
+                        <div>
+                            <strong>求解过程中出现错误</strong><br>
+                            ${error.message}
+                        </div>
+                    `;
+                    validationAlert.className = 'alert alert-warning';
+                    validationAlert.style.display = 'flex';
+                }
+            }, 100);
+        }
+
+        // 显示分配结果
+        function displayResults(allocation, dailyTotals) {
+            // 隐藏加载中，显示结果
+            loadingElement.style.display = 'none';
+            resultContainer.style.display = 'block';
+
+            // 创建表格HTML
+            let tableHtml = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>人员</th>
+            `;
+
+            // 添加日期列
+            for (let j = 0; j < days; j++) {
+                tableHtml += `<th>第${j + 1}天</th>`;
+            }
+
+            tableHtml += `
+                <th>总计</th>
+                <th>需求</th>
+                </tr>
+                </thead>
+                <tbody>
+            `;
+
+            // 添加数据行
+            for (let i = 0; i < allocation.length; i++) {
+                const person = allocation[i];
+                tableHtml += `<tr><td>${person.name}</td>`;
+
+                for (let j = 0; j < days; j++) {
+                    const value = person.daily[j];
+                    const cellClass = value === 0 ? 'zero' : 'non-zero';
+                    tableHtml += `<td class="result-cell ${cellClass}">${value === 0 ? '-' : value}</td>`;
+                }
+
+                tableHtml += `<td class="result-cell non-zero">${person.total}</td>`;
+                tableHtml += `<td class="result-cell ${person.demand === 0 ? 'zero' : 'non-zero'}">${person.demand === 0 ? '-' : person.demand}</td>`;
+                tableHtml += `</tr>`;
+            }
+
+            // 添加每日总计行
+            tableHtml += `<tr><td><strong>每日总计</strong></td>`;
+
+            for (let j = 0; j < days; j++) {
+                tableHtml += `<td class="result-cell non-zero"><strong>${dailyTotals[j]}</strong></td>`;
+            }
+
+            tableHtml += `<td class="result-cell non-zero"><strong>${dailyTotals.reduce((a, b) => a + b, 0)}</strong></td>`;
+            tableHtml += `<td></td></tr>`;
+
+            tableHtml += `</tbody></table>`;
+
+            // 更新表格容器
+            resultTableContainer.innerHTML = tableHtml;
+
+            // 更新统计信息
+            updateStats(allocation, dailyTotals);
+        }
+
+        // 更新统计信息
+        function updateStats(allocation, dailyTotals) {
+            const totalPackages = demands.reduce((a, b) => a + b, 0);
+            const peopleWithDemand = demands.filter(d => d > 0).length;
+            const peopleWithZeroDemand = demands.filter(d => d === 0).length;
+
+            const statsHtml = `
+                <div class="stat-card">
+                    <div class="stat-label">总包数</div>
+                    <div class="stat-value">${totalPackages}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">分配天数</div>
+                    <div class="stat-value">${days}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">每天分配总量</div>
+                    <div class="stat-value">${dailyTotal}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">每人每天最多</div>
+                    <div class="stat-value">${maxPerDay}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">有需求人数</div>
+                    <div class="stat-value">${peopleWithDemand}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">零需求人数</div>
+                    <div class="stat-value">${peopleWithZeroDemand}</div>
+                </div>
+            `;
+
+            statsContainer.innerHTML = statsHtml;
+        }
+
+        // 验证分配结果
+        function validateResults(allocation, dailyTotals) {
+            let allValid = true;
+            const issues = [];
+            const successes = [];
+
+            // 检查每人每天≤maxPerDay
+            for (let i = 0; i < allocation.length; i++) {
+                for (let j = 0; j < days; j++) {
+                    const val = allocation[i].daily[j];
+                    if (val > maxPerDay) {
+                        allValid = false;
+                        issues.push(`❌ ${allocation[i].name} 第${j + 1}天分配了${val}个，超过${maxPerDay}个限制`);
+                    }
+                }
+            }
+
+            // 检查每人总数
+            for (let i = 0; i < allocation.length; i++) {
+                const total = allocation[i].total;
+                if (total !== allocation[i].demand) {
+                    allValid = false;
+                    issues.push(`❌ ${allocation[i].name} 总计${total}个，需求${allocation[i].demand}个`);
+                } else {
+                    successes.push(`✅ ${allocation[i].name} 总计${total}个，满足需求`);
+                }
+            }
+
+            // 检查每天总量
+            for (let j = 0; j < days; j++) {
+                if (dailyTotals[j] !== dailyTotal) {
+                    allValid = false;
+                    issues.push(`❌ 第${j + 1}天总计${dailyTotals[j]}个，应为${dailyTotal}个`);
+                } else {
+                    successes.push(`✅ 第${j + 1}天总计${dailyTotals[j]}个，满足要求`);
+                }
+            }
+
+            // 显示验证结果
+            let validationHtml = '';
+
+            // 显示成功验证
+            if (successes.length > 0) {
+                successes.slice(0, 5).forEach(success => {
+                    validationHtml += `<div class="validation-item success"><i class="fas fa-check-circle"></i> ${success}</div>`;
+                });
+
+                if (successes.length > 5) {
+                    validationHtml += `<div class="validation-item">... 还有 ${successes.length - 5} 项验证通过</div>`;
+                }
+            }
+
+            // 显示问题
+            if (issues.length > 0) {
+                issues.forEach(issue => {
+                    validationHtml += `<div class="validation-item error"><i class="fas fa-times-circle"></i> ${issue}</div>`;
+                });
+            }
+
+            validationResults.innerHTML = validationHtml;
+
+            // 显示验证提示
+            if (allValid) {
+                validationAlert.innerHTML = `
+                    <i class="fas fa-check-circle fa-2x"></i>
+                    <div>
+                        <strong>✅ 所有约束条件均满足！</strong><br>
+                        分配方案通过了所有验证检查。
+                    </div>
+                `;
+                validationAlert.className = 'alert alert-success';
+            } else {
+                validationAlert.innerHTML = `
+                    <i class="fas fa-exclamation-triangle fa-2x"></i>
+                    <div>
+                        <strong>⚠️ 发现 ${issues.length} 个问题</strong><br>
+                        请检查分配方案是否满足所有约束条件。
+                    </div>
+                `;
+                validationAlert.className = 'alert alert-warning';
+            }
+
+            validationAlert.style.display = 'flex';
+        }
+
+        // 生成CSV预览
+        function generateCsvPreview(allocation, dailyTotals) {
+            let csvContent = '人员';
+
+            // 添加日期列标题
+            for (let j = 0; j < days; j++) {
+                csvContent += `,第${j + 1}天`;
+            }
+
+            csvContent += ',总计,需求\n';
+
+            // 添加数据行
+            for (let i = 0; i < allocation.length; i++) {
+                const person = allocation[i];
+                csvContent += `${person.name}`;
+
+                for (let j = 0; j < days; j++) {
+                    csvContent += `,${person.daily[j]}`;
+                }
+
+                csvContent += `,${person.total},${person.demand}\n`;
+            }
+
+            // 添加每日总计行
+            csvContent += '每日总计';
+            for (let j = 0; j < days; j++) {
+                csvContent += `,${dailyTotals[j]}`;
+            }
+            csvContent += `,${dailyTotals.reduce((a, b) => a + b, 0)},\n`;
+
+            // 添加统计信息
+            csvContent += '\n统计信息\n';
+            csvContent += `总包数,${demands.reduce((a, b) => a + b, 0)}\n`;
+            csvContent += `分配天数,${days}\n`;
+            csvContent += `每天分配总量,${dailyTotal}\n`;
+            csvContent += `每人每天最多,${maxPerDay}\n`;
+            csvContent += `有需求人数,${demands.filter(d => d > 0).length}\n`;
+            csvContent += `零需求人数,${demands.filter(d => d === 0).length}\n`;
+
+            // 显示CSV预览
+            csvPreview.textContent = csvContent;
+        }
+
+        // 导出CSV文件
+        function exportToCsv() {
+            const csvContent = csvPreview.textContent;
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+            const filename = `包分配方案_${timestamp}.csv`;
+
+            const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        // 复制表格内容
+        function copyTableToClipboard() {
+            const table = resultTableContainer.querySelector('table');
+            const range = document.createRange();
+            range.selectNode(table);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    alert('表格已复制到剪贴板！');
+                } else {
+                    alert('复制失败，请手动选择表格内容复制。');
+                }
+            } catch (err) {
+                alert('复制失败：' + err);
+            }
+
+            window.getSelection().removeAllRanges();
+        }
+
+        // 重置数据
+        function resetData() {
+            // 重置人员表格
+            initPersonTable();
+
+            // 重置参数
+            daysInput.value = 8;
+            dailyTotalInput.value = 15;
+            maxPerDayInput.value = 3;
+
+            // 重置UI
+            loadingElement.style.display = 'none';
+            resultContainer.style.display = 'none';
+            validationResults.innerHTML = '';
+            validationAlert.style.display = 'none';
+
+            // 显示提示
+            validationAlert.innerHTML = `
+                <i class="fas fa-info-circle fa-2x"></i>
+                <div>
+                    <strong>数据已重置</strong><br>
+                    已恢复为默认人员需求和分配参数，可重新编辑后求解。
+                </div>
+            `;
+            validationAlert.className = 'alert alert-success';
+            validationAlert.style.display = 'flex';
+        }
+
+        // 添加新人员
+        function addNewPerson() {
+            const rows = personDemandTable.querySelectorAll('tr');
+            addPersonRow(rows.length + 1, `人员${rows.length + 1}`, 0);
+            syncPersonData();
+        }
+
+        // 事件监听
+        addPersonBtn.addEventListener('click', addNewPerson);
+        solveBtn.addEventListener('click', solveDistribution);
+        resetBtn.addEventListener('click', resetData);
+        exportCsvBtn.addEventListener('click', exportToCsv);
+        copyTableBtn.addEventListener('click', copyTableToClipboard);
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function () {
+            // 初始化人员表格
+            initPersonTable();
+
+            // 显示初始提示
+            validationAlert.innerHTML = `
+                <i class="fas fa-info-circle fa-2x"></i>
+                <div>
+                    <strong>准备就绪</strong><br>
+                    请先编辑人员需求信息，再设置分配参数，最后点击"求解分配方案"按钮开始计算。
+                </div>
+            `;
+            validationAlert.className = 'alert alert-success';
+            validationAlert.style.display = 'flex';
+        });
+    </script>
+</body>
+
+</html></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/profile%20picture.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">silentboy</div><div class="author-info-description">咸鱼不焦虑，因为它早就腌入味了</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/silentboy-ben"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/silentboy-ben" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/11/02/%E8%A7%A3%E5%86%B3%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%86%B2%E7%AA%81/" title="解决快捷键冲突">解决快捷键冲突</a><time datetime="2025-11-01T16:00:00.000Z" title="发表于 2025-11-02 00:00:00">2025-11-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/23/%E7%AC%AC%E4%BA%94%E5%B1%8A%E9%95%BF%E5%9F%8E%E6%9D%AFwp/" title="第五届长城杯wp">第五届长城杯wp</a><time datetime="2025-09-22T16:00:00.000Z" title="发表于 2025-09-23 00:00:00">2025-09-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/17/%E8%A7%A3%E5%86%B3IDEA%E5%BC%80%E5%8F%91%E6%97%B6%E5%87%BA%E7%8E%B0%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E9%97%AE%E9%A2%98/" title="解决IDEA开发时出现内存不足问题">解决IDEA开发时出现内存不足问题</a><time datetime="2025-08-17T02:49:00.000Z" title="发表于 2025-08-17 10:49:00">2025-08-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/02/Lombok%E6%B3%A8%E8%A7%A3%E7%9A%84%E9%85%8D%E7%BD%AE%E5%8F%8A%E4%BD%BF%E7%94%A8/" title="Lombok注解的配置及使用">Lombok注解的配置及使用</a><time datetime="2025-08-02T08:46:00.000Z" title="发表于 2025-08-02 16:46:00">2025-08-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/13/%E5%85%B3%E4%BA%8EIDEA%E5%92%8CPyCharm%E5%90%8C%E6%97%B6%E5%AE%89%E8%A3%85%EF%BC%8C%E7%94%A8%E5%90%8C%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95%E7%A0%B4%E8%A7%A3%E5%90%8E%E5%AF%BC%E8%87%B4%E5%85%B6%E4%B8%AD%E4%B8%80%E4%B8%AA%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E6%88%96%E6%97%A0%E6%B3%95%E7%A0%B4%E8%A7%A3%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" title="关于IDEA和PyCharm同时安装，用同一种方法破解后导致其中一个无法使用或无法破解的解决办法">关于IDEA和PyCharm同时安装，用同一种方法破解后导致其中一个无法使用或无法破解的解决办法</a><time datetime="2025-07-13T12:34:00.000Z" title="发表于 2025-07-13 20:34:00">2025-07-13</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E8%BD%AF%E4%BB%B6%E6%BF%80%E6%B4%BB/" style="font-size: 1.5em; color: #99a9bf">软件激活</a> <a href="/tags/writeup/" style="font-size: 1.1em; color: #999">writeup</a> <a href="/tags/Java/" style="font-size: 1.1em; color: #999">Java</a> <a href="/tags/IDEA/" style="font-size: 1.1em; color: #999">IDEA</a> <a href="/tags/CTF/" style="font-size: 1.1em; color: #999">CTF</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" style="font-size: 1.1em; color: #999">软件安装</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/11/">
+            <span class="card-archive-list-date">
+              十一月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              九月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/08/">
+            <span class="card-archive-list-date">
+              八月 2025
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/07/">
+            <span class="card-archive-list-date">
+              七月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/05/">
+            <span class="card-archive-list-date">
+              五月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">6</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">4.8k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-12-20T15:35:19.483Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2025 By silentboy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
