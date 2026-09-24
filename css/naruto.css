@@ -1,0 +1,844 @@
+/* ====================================
+   NARUTO STYLE - 火影忍者风格自定义样式
+   木叶飞舞之处，火亦生生不息
+   ==================================== */
+
+/* ---- CSS 变量 ---- */
+:root {
+  --naruto-orange: #ff7500;
+  --naruto-orange-dim: #e8590c;
+  --naruto-orange-glow: rgba(255, 117, 0, 0.4);
+  --naruto-orange-subtle: rgba(255, 117, 0, 0.08);
+  --naruto-blue: #4fc3f7;
+  --naruto-blue-glow: rgba(79, 195, 247, 0.4);
+  --naruto-bg-dark: #10131c;
+  --naruto-bg-card: #16213e;
+  --naruto-bg-card-hover: #1c2a4a;
+  --naruto-bg-surface: #1b2b4a;
+  --naruto-border: rgba(255, 117, 0, 0.18);
+  --naruto-border-active: rgba(255, 117, 0, 0.55);
+  --naruto-text: #d8d3c8;
+  --naruto-text-dim: #8f94a3;
+  --naruto-font: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --naruto-font-display: "Ma Shan Zheng", "Microsoft YaHei", cursive;
+  --naruto-font-code: "Fira Code", consolas, monospace;
+}
+
+/* ---- 全局基础 ---- */
+body {
+  background: var(--naruto-bg-dark) !important;
+  color: var(--naruto-text) !important;
+  font-family: var(--naruto-font) !important;
+}
+
+::selection {
+  background: var(--naruto-orange) !important;
+  color: var(--naruto-bg-dark) !important;
+}
+
+/* ---- 滚动条 ---- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--naruto-bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--naruto-orange-dim);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--naruto-orange);
+}
+
+/* ---- 导航栏 ---- */
+#nav {
+  background: rgba(16, 19, 28, 0.92) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--naruto-border) !important;
+  box-shadow: 0 1px 20px rgba(255, 117, 0, 0.06);
+}
+
+#nav .site-name {
+  font-family: var(--naruto-font-display) !important;
+  color: var(--naruto-orange) !important;
+  text-shadow:
+    0 0 10px var(--naruto-orange-glow),
+    0 0 30px rgba(255, 117, 0, 0.2);
+  letter-spacing: 4px;
+  font-weight: 400;
+  font-size: 1.4rem !important;
+}
+
+#nav .site-name:hover {
+  text-shadow:
+    0 0 15px var(--naruto-orange-glow),
+    0 0 40px rgba(255, 117, 0, 0.3),
+    0 0 60px rgba(255, 117, 0, 0.15);
+}
+
+#nav .menus_item a {
+  font-family: var(--naruto-font) !important;
+  color: var(--naruto-text) !important;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+#nav .menus_item a:hover {
+  color: var(--naruto-orange) !important;
+  text-shadow: 0 0 8px var(--naruto-orange-glow);
+}
+
+/* 菜单下划线 - 苦无形 */
+#nav .menus_item a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--naruto-orange);
+  box-shadow: 0 0 6px var(--naruto-orange-glow);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+#nav .menus_item a:hover::after {
+  width: 80%;
+}
+
+/* 移动端菜单 */
+#mobile-sidebar #mobile-menu .menus_item a {
+  font-family: var(--naruto-font) !important;
+  color: var(--naruto-text) !important;
+}
+
+#mobile-sidebar #mobile-menu .menus_item a:hover {
+  color: var(--naruto-orange) !important;
+}
+
+/* ---- 首页 Hero 区域 ---- */
+/* 全站横幅统一顶部对齐：首页/文章页/标签分类页，图片顶部显示，底部过长裁剪 */
+#page-header {
+  background-position: center top !important;
+}
+
+#site-info {
+  text-align: center;
+}
+
+#site-info .site-name {
+  font-family: var(--naruto-font-display) !important;
+  color: var(--naruto-orange) !important;
+  text-shadow:
+    0 0 20px var(--naruto-orange-glow),
+    0 0 60px rgba(255, 117, 0, 0.15);
+  letter-spacing: 10px;
+  font-size: 3rem !important;
+  font-weight: 400;
+}
+
+#site-info .site-name:hover {
+  text-shadow:
+    0 0 25px var(--naruto-orange-glow),
+    0 0 80px rgba(255, 117, 0, 0.2),
+    0 0 120px rgba(255, 117, 0, 0.1);
+}
+
+#site-info .site-subtitle {
+  font-family: var(--naruto-font) !important;
+  color: var(--naruto-text-dim) !important;
+  letter-spacing: 3px;
+}
+
+/* 向下滚动箭头 */
+#scroll-down .scroll-down-effects {
+  color: var(--naruto-orange) !important;
+}
+
+/* ---- 文章卡片 ---- */
+#recent-posts .recent-post-item {
+  background: var(--naruto-bg-card) !important;
+  border: 1px solid var(--naruto-border) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 漩涡一族纹章 - 左侧橙色条纹 */
+#recent-posts .recent-post-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--naruto-orange),
+    var(--naruto-orange) 8px,
+    transparent 8px,
+    transparent 12px
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#recent-posts .recent-post-item:hover {
+  border-color: var(--naruto-border-active) !important;
+  box-shadow:
+    0 8px 30px rgba(255, 117, 0, 0.1),
+    0 0 1px var(--naruto-orange);
+  transform: translateY(-2px);
+}
+
+#recent-posts .recent-post-item:hover::before {
+  opacity: 1;
+}
+
+#recent-posts .recent-post-item .recent-post-info .article-title {
+  color: var(--naruto-text) !important;
+  font-family: var(--naruto-font) !important;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+#recent-posts .recent-post-item .recent-post-info .article-title:hover {
+  color: var(--naruto-orange) !important;
+}
+
+#recent-posts .recent-post-item .recent-post-info .content {
+  color: var(--naruto-text-dim) !important;
+}
+
+#recent-posts .recent-post-item .recent-post-info .article-meta-wrap {
+  color: var(--naruto-text-dim) !important;
+}
+
+#recent-posts .recent-post-item .recent-post-info .article-meta-wrap a {
+  color: var(--naruto-orange-dim) !important;
+}
+
+/* ---- 侧边栏 ---- */
+#sidebar {
+  background: transparent !important;
+}
+
+#sidebar .card-widget {
+  background: var(--naruto-bg-card) !important;
+  border: 1px solid var(--naruto-border) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 卡片顶部漩涡纹装饰线 */
+#sidebar .card-widget::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    var(--naruto-orange) 16px,
+    transparent 16px,
+    transparent 32px
+  );
+  opacity: 0.6;
+}
+
+#sidebar .card-widget .item-headline {
+  color: var(--naruto-orange) !important;
+  font-family: var(--naruto-font) !important;
+  font-weight: 600;
+  letter-spacing: 2px;
+  border-bottom: 1px solid var(--naruto-border) !important;
+  padding-bottom: 8px;
+}
+
+#sidebar .card-widget .item-headline i {
+  color: var(--naruto-orange) !important;
+}
+
+/* 作者卡片 */
+#sidebar .card-author .author-info__name {
+  color: var(--naruto-orange) !important;
+  font-family: var(--naruto-font-display) !important;
+  letter-spacing: 3px;
+}
+
+#sidebar .card-author .author-info__description {
+  color: var(--naruto-text-dim) !important;
+}
+
+#sidebar .card-author .author-info__description span {
+  color: var(--naruto-orange) !important;
+}
+
+/* 公告卡片 */
+#sidebar .card-announcement .announcement_content span {
+  color: var(--naruto-orange) !important;
+}
+
+/* 标签卡片 - 手里剑样式 */
+#sidebar .card-tag .tag-cloud a {
+  color: var(--naruto-text-dim) !important;
+  border: 1px solid var(--naruto-border) !important;
+  padding: 2px 8px;
+  transition: all 0.3s ease;
+}
+
+#sidebar .card-tag .tag-cloud a:hover {
+  color: var(--naruto-orange) !important;
+  border-color: var(--naruto-orange) !important;
+  text-shadow: 0 0 6px var(--naruto-orange-glow);
+  box-shadow: 0 0 8px rgba(255, 117, 0, 0.15);
+}
+
+/* 归档卡片 */
+#sidebar .card-archives .card-archive-list .card-archive-list-link {
+  color: var(--naruto-text) !important;
+  border-bottom: 1px solid var(--naruto-border) !important;
+}
+
+#sidebar .card-archives .card-archive-list .card-archive-list-link:hover {
+  color: var(--naruto-orange) !important;
+}
+
+/* 分类卡片 */
+#sidebar .card-categories .card-category-list .card-category-list-link {
+  color: var(--naruto-text) !important;
+}
+
+#sidebar .card-categories .card-category-list .card-category-list-link:hover {
+  color: var(--naruto-orange) !important;
+}
+
+/* 网站信息卡片 */
+#sidebar .card-webinfo .webinfo .webinfo-item {
+  color: var(--naruto-text-dim) !important;
+}
+
+/* ---- 分页器 ---- */
+#pagination .pagination .page-number {
+  background: var(--naruto-bg-card) !important;
+  color: var(--naruto-text) !important;
+  border: 1px solid var(--naruto-border) !important;
+  border-radius: 4px !important;
+  transition: all 0.3s ease;
+}
+
+#pagination .pagination .page-number:hover,
+#pagination .pagination .page-number.current {
+  background: var(--naruto-orange) !important;
+  color: var(--naruto-bg-dark) !important;
+  border-color: var(--naruto-orange) !important;
+  box-shadow: 0 0 12px var(--naruto-orange-glow);
+}
+
+/* ---- 文章页面 ---- */
+#post .post-block,
+#page .post-block,
+#archive .post-block {
+  background: var(--naruto-bg-card) !important;
+  border: 1px solid var(--naruto-border) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+#post .post-title,
+#page .post-title,
+#archive .article-sort-title {
+  font-family: var(--naruto-font) !important;
+  color: var(--naruto-orange) !important;
+  text-shadow: 0 0 10px rgba(255, 117, 0, 0.15);
+}
+
+#post .post-meta {
+  color: var(--naruto-text-dim) !important;
+}
+
+#post .post-meta a {
+  color: var(--naruto-orange-dim) !important;
+}
+
+#post .post-body {
+  color: var(--naruto-text) !important;
+}
+
+/* 标题 - 漩涡前缀 */
+#post .post-body h1,
+#post .post-body h2,
+#post .post-body h3,
+#post .post-body h4,
+#post .post-body h5,
+#post .post-body h6 {
+  color: var(--naruto-orange) !important;
+  font-family: var(--naruto-font) !important;
+  font-weight: 600;
+  border-bottom: 1px solid var(--naruto-border) !important;
+  padding-bottom: 8px;
+  position: relative;
+}
+
+#post .post-body h1::before,
+#post .post-body h2::before {
+  content: "\21BB  ";
+  color: var(--naruto-blue);
+  font-weight: 700;
+}
+
+#post .post-body a {
+  color: var(--naruto-orange) !important;
+  border-bottom: 1px dashed var(--naruto-orange-dim);
+  transition: all 0.3s ease;
+}
+
+#post .post-body a:hover {
+  text-shadow: 0 0 6px var(--naruto-orange-glow);
+  border-bottom-style: solid;
+}
+
+/* 引用块 - 卷轴质感 */
+#post .post-body blockquote {
+  background: var(--naruto-orange-subtle) !important;
+  border-left: 3px solid var(--naruto-orange) !important;
+  border-radius: 0 4px 4px 0 !important;
+  box-shadow: inset 0 0 20px rgba(255, 117, 0, 0.03);
+}
+
+#post .post-body blockquote p {
+  color: var(--naruto-text) !important;
+}
+
+#post .post-body code {
+  background: rgba(255, 117, 0, 0.08) !important;
+  color: var(--naruto-orange) !important;
+  font-family: var(--naruto-font-code) !important;
+  border: 1px solid rgba(255, 117, 0, 0.12);
+  border-radius: 3px;
+  padding: 1px 6px;
+}
+
+#post .post-body table th {
+  background: var(--naruto-bg-surface) !important;
+  color: var(--naruto-orange) !important;
+  border: 1px solid var(--naruto-border) !important;
+}
+
+#post .post-body table td {
+  border: 1px solid var(--naruto-border) !important;
+  color: var(--naruto-text) !important;
+}
+
+#post .post-body table tr:hover td {
+  background: var(--naruto-orange-subtle) !important;
+}
+
+#post .post-body img {
+  border: 1px solid var(--naruto-border) !important;
+  border-radius: 4px !important;
+}
+
+#post .post-body hr {
+  border: none !important;
+  height: 1px !important;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--naruto-orange),
+    transparent
+  ) !important;
+}
+
+/* ---- 代码块 ---- */
+#post .post-body figure.highlight,
+#page .post-body figure.highlight {
+  background: #0d1117 !important;
+  border: 1px solid var(--naruto-border) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+#post .post-body figure.highlight::before {
+  content: "NINJA://SCROLL";
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-family: var(--naruto-font-code);
+  font-size: 10px;
+  color: rgba(255, 117, 0, 0.35);
+  letter-spacing: 2px;
+  padding: 4px 8px;
+}
+
+#post .post-body figure.highlight .code-lang {
+  color: var(--naruto-orange) !important;
+  font-family: var(--naruto-font-code) !important;
+}
+
+/* ---- 标签页 ---- */
+#page .tag-cloud-title {
+  color: var(--naruto-orange) !important;
+  font-family: var(--naruto-font-display) !important;
+  letter-spacing: 4px;
+}
+
+#page .tag-cloud a {
+  color: var(--naruto-text-dim) !important;
+  border: 1px solid var(--naruto-border);
+  padding: 4px 12px;
+  transition: all 0.3s ease;
+}
+
+#page .tag-cloud a:hover {
+  color: var(--naruto-orange) !important;
+  border-color: var(--naruto-orange);
+  text-shadow: 0 0 8px var(--naruto-orange-glow);
+  box-shadow: 0 0 12px rgba(255, 117, 0, 0.15);
+}
+
+/* ---- 分类页 ---- */
+#page .category-lists .category-title {
+  color: var(--naruto-orange) !important;
+  font-family: var(--naruto-font-display) !important;
+  letter-spacing: 4px;
+}
+
+#page .category-lists .category-list a {
+  color: var(--naruto-text) !important;
+}
+
+#page .category-lists .category-list a:hover {
+  color: var(--naruto-orange) !important;
+}
+
+/* ---- 搜索页面 ---- */
+#search-dialog {
+  background: var(--naruto-bg-card) !important;
+  border: 1px solid var(--naruto-border) !important;
+  border-radius: 4px !important;
+}
+
+#search-dialog .search-title {
+  color: var(--naruto-orange) !important;
+  font-family: var(--naruto-font-display) !important;
+  letter-spacing: 3px;
+}
+
+#search-dialog #search-input {
+  background: var(--naruto-bg-surface) !important;
+  color: var(--naruto-text) !important;
+  border: 1px solid var(--naruto-border) !important;
+  border-radius: 4px !important;
+  font-family: var(--naruto-font-code) !important;
+}
+
+#search-dialog #search-input:focus {
+  border-color: var(--naruto-orange) !important;
+  box-shadow: 0 0 10px var(--naruto-orange-glow);
+}
+
+#search-dialog .search-result-item {
+  border-bottom: 1px solid var(--naruto-border) !important;
+}
+
+#search-dialog .search-result-title {
+  color: var(--naruto-orange) !important;
+}
+
+/* ---- 页脚（终结之谷背景图 + 深色渐变遮罩保证文字可读） ---- */
+#footer {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(16, 19, 28, 0.4) 0%,
+      rgba(16, 19, 28, 0.82) 100%
+    ),
+    url("/images/valley-end.jpg") center / cover no-repeat !important;
+  border-top: 1px solid var(--naruto-border) !important;
+}
+
+#footer .footer-wrap {
+  color: var(--naruto-text-dim) !important;
+}
+
+#footer a {
+  color: var(--naruto-orange-dim) !important;
+}
+
+#footer a:hover {
+  color: var(--naruto-orange) !important;
+  text-shadow: 0 0 6px var(--naruto-orange-glow);
+}
+
+/* ---- 右下角按钮 ---- */
+#rightside > div > button {
+  background: var(--naruto-bg-card) !important;
+  color: var(--naruto-orange) !important;
+  border: 1px solid var(--naruto-border) !important;
+  border-radius: 4px !important;
+  transition: all 0.3s ease;
+}
+
+#rightside > div > button:hover {
+  background: var(--naruto-orange) !important;
+  color: var(--naruto-bg-dark) !important;
+  box-shadow: 0 0 12px var(--naruto-orange-glow);
+}
+
+/* ---- 加载动画：宇智波鼬 · 万花筒写轮眼 ---- */
+
+/* 左右两半加载背景 - 血夜之黑 */
+#loading-box .loading-left-bg,
+#loading-box .loading-right-bg {
+  background-color: #0d0507 !important;
+}
+
+/* 隐藏原有旋转圈 */
+#loading-box .spinner-box .configure-border-1,
+#loading-box .spinner-box .configure-border-2,
+#loading-box .spinner-box .configure-core {
+  display: none !important;
+}
+
+/* 写轮眼本体（使用裁剪透明化的图片：source/images/sharingan.png） */
+#loading-box .spinner-box::before {
+  content: "";
+  display: block;
+  position: relative;
+  width: 190px;
+  height: 190px;
+  background-image: url("/images/sharingan.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  animation: sharingan-spin 4s linear infinite, sharingan-glow 2.5s ease-in-out infinite;
+}
+
+/* 瞳孔外圈黑环 + 血光脉冲 */
+@keyframes sharingan-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 25px rgba(224, 17, 17, 0.35),
+      0 0 60px rgba(140, 0, 0, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 45px rgba(224, 17, 17, 0.7),
+      0 0 110px rgba(160, 0, 0, 0.45);
+  }
+}
+
+/* 写轮眼旋转 */
+@keyframes sharingan-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 加载文字 - 移至写轮眼下方 */
+#loading-box .loading-word {
+  position: absolute !important;
+  top: calc(50% + 125px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0 !important;
+  color: transparent !important;
+}
+
+#loading-box .loading-word::after {
+  content: "写轮眼 · 开启中";
+  font-family: var(--naruto-font-display) !important;
+  font-size: 22px;
+  letter-spacing: 8px;
+  color: #e01111 !important;
+  text-shadow: 0 0 12px rgba(224, 17, 17, 0.6);
+  animation: naruto-blink 1.2s step-end infinite;
+  white-space: nowrap;
+}
+
+/* ---- TOC 目录 ---- */
+#sidebar .card-toc .toc a {
+  color: var(--naruto-text-dim) !important;
+}
+
+#sidebar .card-toc .toc a:hover {
+  color: var(--naruto-orange) !important;
+}
+
+#sidebar .card-toc .toc .toc-item.active > a {
+  color: var(--naruto-orange) !important;
+}
+
+/* ---- 归档页面 ---- */
+#archive .article-sort-item .article-sort-item-info .article-sort-item-title {
+  color: var(--naruto-text) !important;
+}
+
+#archive
+  .article-sort-item
+  .article-sort-item-info
+  .article-sort-item-title:hover {
+  color: var(--naruto-orange) !important;
+}
+
+#archive .article-sort-item .article-sort-item-info .article-sort-item-tags a {
+  color: var(--naruto-orange-dim) !important;
+}
+
+/* ---- 暗色模式适配 ---- */
+[data-theme="dark"] {
+  --global-bg: var(--naruto-bg-dark) !important;
+}
+
+[data-theme="dark"] body {
+  background: var(--naruto-bg-dark) !important;
+}
+
+[data-theme="dark"] #sidebar .card-widget {
+  background: var(--naruto-bg-card) !important;
+}
+
+[data-theme="dark"] #recent-posts .recent-post-item {
+  background: var(--naruto-bg-card) !important;
+}
+
+/* ---- 亮色模式也保持忍者风 ---- */
+[data-theme="light"] body {
+  background: linear-gradient(
+    135deg,
+    #10131c 0%,
+    #16213e 50%,
+    #10131c 100%
+  ) !important;
+  color: var(--naruto-text) !important;
+}
+
+[data-theme="light"] #sidebar .card-widget {
+  background: var(--naruto-bg-card) !important;
+  color: var(--naruto-text) !important;
+}
+
+[data-theme="light"] #recent-posts .recent-post-item {
+  background: var(--naruto-bg-card) !important;
+}
+
+[data-theme="light"] #nav {
+  background: rgba(16, 19, 28, 0.92) !important;
+}
+
+/* ---- 漩涡纹章角标 ---- */
+.uzumaki-corner {
+  position: relative;
+}
+
+.uzumaki-corner::before,
+.uzumaki-corner::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--naruto-orange);
+  border-style: solid;
+}
+
+.uzumaki-corner::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+
+.uzumaki-corner::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+/* ---- 查克拉脉冲动画 ---- */
+@keyframes chakra-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+#sidebar .card-widget::before {
+  animation: chakra-pulse 3s ease-in-out infinite;
+}
+
+/* ---- 打字机光标闪烁 ---- */
+@keyframes naruto-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* ---- 木叶飘落 ---- */
+@keyframes leaf-fall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(110vh) translateX(6vw) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.naruto-leaf {
+  position: fixed;
+  top: 0;
+  font-size: 18px;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0;
+  animation: leaf-fall linear both;
+  filter: drop-shadow(0 0 4px rgba(255, 117, 0, 0.4));
+}
+
+/* ---- 响应式 ---- */
+@media (max-width: 768px) {
+  #site-info .site-name {
+    letter-spacing: 4px !important;
+    font-size: 2rem !important;
+  }
+}
+
+/* ---- 搜索弹窗遮罩 ---- */
+.search-dialog--active ~ .search-mask {
+  background: rgba(16, 19, 28, 0.85) !important;
+  backdrop-filter: blur(8px);
+}
