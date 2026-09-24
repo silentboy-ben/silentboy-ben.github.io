@@ -96,11 +96,23 @@ body {
   text-shadow: 0 0 8px var(--naruto-orange-glow);
 }
 
-/* 菜单下划线 - 苦无形 */
-#nav .menus_item a::after {
+/* 菜单下划线 - 苦无 */
+/* 屏蔽主题自带下划线：它从图标左缘起画，与文字错位 */
+#nav .site-page:not(.child)::after {
+  content: none;
+}
+
+/* 以文字 span 为锚点居中绘制，图标与下拉箭头不参与定位 */
+#nav .menus_item > .site-page:not(.child) > span,
+#nav #search-button .site-page > span {
+  position: relative;
+}
+
+#nav .menus_item > .site-page:not(.child) > span::after,
+#nav #search-button .site-page > span::after {
   content: "";
   position: absolute;
-  bottom: -2px;
+  bottom: -4px;
   left: 50%;
   width: 0;
   height: 2px;
@@ -110,8 +122,9 @@ body {
   transform: translateX(-50%);
 }
 
-#nav .menus_item a:hover::after {
-  width: 80%;
+#nav .menus_item > .site-page:not(.child):hover > span::after,
+#nav #search-button:hover .site-page > span::after {
+  width: 100%;
 }
 
 /* 移动端菜单 */
