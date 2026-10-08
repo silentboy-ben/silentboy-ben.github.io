@@ -380,6 +380,27 @@ body {
   text-shadow: 0 0 10px rgba(255, 117, 0, 0.15);
 }
 
+/* 文章页标题：居中显示 + 调整字号 */
+#post-info {
+  text-align: center !important;
+}
+
+#post-info .post-title {
+  font-size: 2.8em !important;
+  line-height: 1.4;
+  letter-spacing: 2px;
+}
+
+#post-info #post-meta {
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  #post-info .post-title {
+    font-size: 2.1em !important;
+  }
+}
+
 #post .post-meta {
   color: var(--naruto-text-dim) !important;
 }
